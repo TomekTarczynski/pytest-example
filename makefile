@@ -19,13 +19,18 @@ install: $(VENV_DIR)/Scripts/activate
 	@$(PIP) install -r $(REQUIREMENTS)
 
 # Run the script
-run: install
+run: install test
 	@echo "Running the script..."
 	@$(PYTHON) $(SCRIPT)
+
+# Run tests with pytest
+test: install
+	@echo "Running tests..."
+	@$(VENV_DIR)/Scripts/pytest -vv
 
 # Clean up the virtual environment
 clean:
 	@echo "Removing virtual environment..."
 	@rm -rf $(VENV_DIR)
 
-.PHONY: all install run clean
+.PHONY: all install run test clean
